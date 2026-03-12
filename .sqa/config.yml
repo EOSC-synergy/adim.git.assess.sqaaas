@@ -1,0 +1,78 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: feature/pynblint
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/grycap/adim:
+      branch: main
+      repo: https://github.com/grycap/adim.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/grycap/adim git:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-orchid-goat.sh
+        container: qc.acc_snippy-cream-kudu
+  QC.Doc:
+    repos:
+      github.com/grycap/adim find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-chestnut-devil.sh
+        container: qc.doc_skanky-cream-snake
+      github.com/grycap/adim git:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-persimmon-eagle.sh
+        container: qc.doc_sickly-cinnabar-camel
+      github.com/grycap/adim markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-chocolate-malamute.sh
+        container: qc.doc_stuffy-tangerine-whale
+  QC.Lic:
+    repos:
+      github.com/grycap/adim licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-eggplant-chimpanzee.sh
+        container: qc.lic_woozy-cream-koala
+  QC.Met:
+    repos:
+      github.com/grycap/adim validate_codemeta:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-viridian-tamarin.sh
+        container: qc.met_slimy-myrtle-gecko
+  QC.Sec:
+    repos:
+      github.com/grycap/adim bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-eggplant-corgi.sh
+        container: qc.sec_gummy-plum-falcon
+  QC.Sty:
+    repos:
+      github.com/grycap/adim flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-ochre-angora.sh
+        container: qc.sty_flabby-vermilion-ant
+      github.com/grycap/adim hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-taupe-camel.sh
+        container: qc.sty_cheeky-charcoal-affenpinscher
+      github.com/grycap/adim jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-silver-affenpinscher.sh
+        container: qc.sty_craggy-turquoise-bison
+  QC.Uni:
+    repos:
+      github.com/grycap/adim pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-persimmon-drever.sh
+        container: qc.uni_cozy-lemon-chinchilla
+  QC.Ver:
+    repos:
+      github.com/grycap/adim get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-corn-butterfly.sh
+        container: qc.ver_geeky-cyan-warthog
+timeout: 5400
